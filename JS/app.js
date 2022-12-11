@@ -1,186 +1,181 @@
 'use strict';
 
-// Tony is a volunteer for the kitten rescue... they need a way to get the profiles of kittens who will be up for adoption onto the page... new kittens come in and they need to be added. Tony knows a little bit of javascript... he can make objects!
+// ************ GLOBALS VARIABLES******************
 
-// ? what are we going to display?
-// Kittens
-// TODO figure out what info about each kitten we need to show:
-// * name
-// * age with a function - 3 months and 12 months
-// * interests []
-// * isGoodWithCats
-// * isGoodWithDogs
-// * isGoodWithKids
-// * photo
+let hours = ['6am', '7am', '8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm', '7pm'];
 
-// ************ GLOBALS ******************
-// HELPFUL FOR YOUR LAB!!
-//  let hours = ['6am', '7am', '8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm', '7pm'];
+// ************ DOM WINDOW **************
 
-// ************ DOM WINDOWS **************
-
-// STEP 1: WINDOW INTO THE DOM
-let kittenSection = document.getElementById('kitten-profiles');
-
-// console.dir(kittenSection);
-
-// *********** HELPER FUNCTIONS / UTILITES ************
-function randomAge(min,max){
-  // got from MDN docs
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+let storeSection = document.getElementById('stores');
 
 // *********** OBJECT LITERALS ****************
 
-// **** HELPFUL FOR START OF YOUR LAB *****
+// Store #1
 let seattle = {
   name: 'Seattle',
   minCust: 23,
   maxCust: 65,
   avgCookieBought: 6.3,
   cookiesBought: [],
-};
-
-
-
-let frankie = {
-  name: 'Frankie',
-  age: 0,
-  interests: ['wet food', 'toy mice', 'catnip'],
-  isGoodWithCats: true,
-  isGoodWithDogs: true,
-  isGoodWithKids: true,
-  photo: 'img/frankie.jpeg',
-  getAge: function(){
-    this.age = `${this.name} is ${randomAge(3,12)} months old`;
+  total: 0,
+  custPerHr: function(){
+    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
   },
-
+  cookieSales: function(){
+    for(let i = 0; i < hours.length; i++){
+      let cookiesNeeded = this.custPerHr() * this.avgCookieBought;
+      this.cookiesBought.push(cookiesNeeded);
+      this.total = this.total + cookiesNeeded;
+    }
+  },
   render: function(){
-    // ****** DOM MANIPULATION ******
-    // STEP 2: Create an element
-
-    let articleElem = document.createElement('article');
-
-    // STEP 3: Give Context - skip
-    // STEP 4: ADD IT TO THE DOM parent.appendChild(child)
-    kittenSection.appendChild(articleElem);
-
-
-    let h2Elem = document.createElement('h2');
-    // h2Elem.textContent = this.name;
-    h2Elem.innerText = this.name;
-    articleElem.appendChild(h2Elem);
-
-    let pElem = document.createElement('p');
-    pElem.textContent = this.age;
-    articleElem.appendChild(pElem);
-
-    // HELPFUL FOR LAB
+    this.cookieSales();
     let ulElem = document.createElement('ul');
-    articleElem.appendChild(ulElem);
-
-    for(let i = 0; i < this.interests.length; i++){
+    storeSection.appendChild(ulElem);
+    
+    for(let i =0; i < this.cookieSales.length; i++){
       let liElem = document.createElement('li');
-      liElem.textContent = this.interests[i];
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`; cookies
       ulElem.appendChild(liElem);
     }
-
-    let imgElem = document.createElement('img');
-    imgElem.src = this.photo;
-    imgElem.alt = `${this.name} is an adorable ${this.age} month old kitten.`;
-    articleElem.appendChild(imgElem);
   }
 };
 
+seattle.render();
 
-let jumper = {
-  name: 'Jumper',
-  age: 0,
-  interests: ['dry food', 'fish toy', 'treats'],
-  isGoodWithCats: true,
-  isGoodWithDogs: true,
-  isGoodWithKids: true,
-  photo: 'img/jumper.jpeg',
-  getAge: function () {
-    this.age = randomAge(3, 12);
+// Store #2
+
+let tokyo = {
+  name: 'Tokyo',
+  minCust: 3,
+  maxCust: 24,
+  avgCookieBought: 1.2,
+  cookiesBought: [],
+  total: 0,
+  custPerHr: function(){
+    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
   },
-  render: function () {
-    // ******** DOM MANIPULATION ********
-
-    let articleElem = document.createElement('article');
-    kittenSection.appendChild(articleElem);
-
-    let h2Elem = document.createElement('h2');
-    h2Elem.textContent = this.name;
-    articleElem.appendChild(h2Elem);
-
-    let pElem = document.createElement('p');
-    pElem.textContent = `${this.name} is ${this.age} months`;
-    articleElem.appendChild(pElem);
-
-    let ulElem = document.createElement('ul');
-    articleElem.appendChild(ulElem);
-
-    for (let i = 0; i < this.interests.length; i++) {
-      let liElem = document.createElement('li');
-      liElem.textContent = this.interests[i];
-      ulElem.appendChild(liElem);
+  cookieSales: function(){
+    for(let i = 0; i < hours.length; i++){
+      let cookiesNeeded = this.custPerHr() * this.avgCookieBought;
+      this.cookiesBought.push(cookiesNeeded);
+      this.total = this.total + cookiesNeeded;
     }
-
-    let imgElem = document.createElement('img');
-    imgElem.src = this.photo;
-    imgElem.alt = `${this.name} is an adorable ${this.age} month old kitten.`;
-    articleElem.appendChild(imgElem);
-  }
-};
-
-let serena = {
-  name: 'Serena',
-  age: 0,
-  interests: ['mice', 'lasers', 'scratching'],
-  isGoodWithCats: false,
-  isGoodWithDogs: false,
-  isGoodWithKids: true,
-  photo: 'img/serena.jpeg',
-  getAge: function () {
-    this.age = randomAge(3, 12);
   },
-  render: function () {
-    // ******** DOM MANIPULATION ********
-
-    let articleElem = document.createElement('article');
-    kittenSection.appendChild(articleElem);
-
-    let h2Elem = document.createElement('h2');
-    h2Elem.textContent = this.name;
-    articleElem.appendChild(h2Elem);
-
-    let pElem = document.createElement('p');
-    pElem.textContent = `${this.name} is ${this.age} months`;
-    articleElem.appendChild(pElem);
-
+  render: function(){
+    this.cookieSales();
     let ulElem = document.createElement('ul');
-    articleElem.appendChild(ulElem);
-
-    for (let i = 0; i < this.interests.length; i++) {
+    storeSection.appendChild(ulElem);
+    
+    for(let i =0; i < this.cookieSales.length; i++){
       let liElem = document.createElement('li');
-      liElem.textContent = this.interests[i];
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`; 
       ulElem.appendChild(liElem);
     }
-
-    let imgElem = document.createElement('img');
-    imgElem.src = this.photo;
-    imgElem.alt = `${this.name} is an adorable ${this.age} month old kitten.`;
-    articleElem.appendChild(imgElem);
   }
 };
 
+tokyo.render();
 
+// Store #3
+
+let dubai = {
+  name: 'Dubai',
+  minCust: 11,
+  maxCust: 38,
+  avgCookieBought: 3.7,
+  cookiesBought: [],
+  total: 0,
+  custPerHr: function(){
+    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+  },
+  cookieSales: function(){
+    for(let i = 0; i < hours.length; i++){
+      let cookiesNeeded = this.custPerHr() * this.avgCookieBought;
+      this.cookiesBought.push(cookiesNeeded);
+      this.total = this.total + cookiesNeeded;
+    }
+  },
+  render: function(){
+    this.cookieSales();
+    let ulElem = document.createElement('ul');
+    storeSection.appendChild(ulElem);
+    
+    for(let i =0; i < this.cookieSales.length; i++){
+      let liElem = document.createElement('li');
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`; 
+      ulElem.appendChild(liElem);
+    }
+  }
+};
+
+dubai.render();
+
+// Store #4
+
+let paris = {
+  name: 'Paris',
+  minCust: 20,
+  maxCust: 38,
+  avgCookieBought: 2.3,
+  cookiesBought: [],
+  total: 0,
+  custPerHr: function(){
+    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+  },
+  cookieSales: function(){
+    for(let i = 0; i < hours.length; i++){
+      let cookiesNeeded = this.custPerHr() * this.avgCookieBought;
+      this.cookiesBought.push(cookiesNeeded);
+      this.total = this.total + cookiesNeeded;
+    }
+  },
+  render: function(){
+    this.cookieSales();
+    let ulElem = document.createElement('ul');
+    storeSection.appendChild(ulElem);
+    
+    for(let i =0; i < this.cookieSales.length; i++){
+      let liElem = document.createElement('li');
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`; 
+      ulElem.appendChild(liElem);
+    }
+  }
+};
+
+paris.render();
+
+// Store #5
+
+let lima = {
+  name: 'Lima',
+  minCust: 2,
+  maxCust: 16,
+  avgCookieBought: 4.6,
+  cookiesBought: [],
+  total: 0,
+  custPerHr: function(){
+    return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+  },
+  cookieSales: function(){
+    for(let i = 0; i < hours.length; i++){
+      let cookiesNeeded = this.custPerHr() * this.avgCookieBought;
+      this.cookiesBought.push(cookiesNeeded);
+      this.total = this.total + cookiesNeeded;
+    }
+  },
+  render: function(){
+    this.cookieSales();
+    let ulElem = document.createElement('ul');
+    storeSection.appendChild(ulElem);
+    
+    for(let i =0; i < this.cookieSales.length; i++){
+      let liElem = document.createElement('li');
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`; 
+      ulElem.appendChild(liElem);
+    }
+  }
+};
+
+lima.render();
 // ********** EXECUTABLE CODE ****************
-frankie.getAge();
-frankie.render();
-jumper.getAge();
-jumper.render();
-serena.getAge();
-serena.render();
-console.log(frankie);
