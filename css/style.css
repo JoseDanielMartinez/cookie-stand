@@ -1,0 +1,76 @@
+*{
+  background-color: pink;
+}
+
+header h1 {
+  text-align: center;
+  font-family: 'Zen Dots', cursive;
+  font-size: 100px;
+}
+
+.img1 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.img2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 50%;
+}
+
+figcaption {
+  margin-top: 25px;
+  text-align: center;
+  font-family: 'Righteous', cursive;
+  font-size: 75px;
+}
+
+article {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+article a{
+  font-size: 2vw;
+}
+
+div {
+  border: 5px solid black;
+  background-color: aqua;
+}
+
+div img {
+  float: left;
+  margin: 20px
+}
+
+p {
+  background-color: inherit;
+  font-size: 25px;
+}
+
+summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer {
+height: 200px;
+background-color: blue;  
+}
+
+footer div{
+  height: 100px;
+  color: aliceblue;
+  background-color: blue;
+  border: 0ch;
+  }
