@@ -4,12 +4,38 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lab 8b</title>
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Lab 09</title>
 </head>
 <body>
-  <h2><a href="index.html">Back to Homepage</a></h2>
-  <section id="stores"></section>
+  <h1><a href="index.html">Back to Homepage</a></h1>
+  <h2>Cookie Data</h2>
+  <section id="stores">
+
+  </section>
+  <form id = "cookie-data">
+    <fieldset>
+      <legend>Cookie Data</legend>
+
+      <label for="userName">Name</label>
+      <input name="userName" type="text" id="userName" placeholder="e.g. Gordon Ramsey"></input>
+
+      <label>Minimum Customers:
+        <input type="text" name="min"></input>
+      </label>
+
+      <label>Maximum Customers:
+        <input type="text" name="max"></input>
+      </label>
+
+      <label>Average:
+        <input type="text" name="average"></input>
+      </label>
+    </fieldset>
+      <button type="submit">Submit</button>
+  </form>
 </body>
+<footer>
 <script src="JS/app.js"></script>
+</footer>
 </html>

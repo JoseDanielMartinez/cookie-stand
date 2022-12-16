@@ -3,6 +3,9 @@
 // ************ GLOBALS VARIABLES******************
 
 let hours = ['6am', '7am', '8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm', '7pm'];
+let cookieData = document.getElementById('cookie-data');
+
+cookieData.addEventListener('submit', handleSubmit);
 
 let tableSelector = document.getElementById('stores');
 
@@ -53,6 +56,51 @@ ShopOne.prototype.render = function () {
   let totalTableData = document.createElement('td');
   totalTableData.textContent = this.total;
   trElem.appendChild(totalTableData);
+
+  function handleSubmit(event){
+    event.preventDefault();
+
+    console.dir(event.target);
+
+    let name = event.target.userName.value;
+    console.log(name);
+
+    let min =  +event.target.min.value;
+    console.log (min);
+
+    let max =  +event.target.max.value;
+    console.log (max);
+
+    let average =  +event.target.average.value;
+    console.log (average);
+
+    let newStore = new storeSection(name, min, max, average);
+    storeLocations.push(newStore);
+
+    document.getElementById("stores").deleteRow(-1);
+
+    newStore.randomCustomers();
+    newStore.randomCookies();
+    newStore.render();
+    footer();
+
+    function footer(){
+      let table = document.getElementById('stores');
+      let tr = document.createElement('tr');
+      let td = document.createElement('td');
+      td.textContent = 'totals';
+      tr.appendChild(td);
+      for (let i = 0; i < hours.length; i++){
+          let totalHours = 0;
+          for (let j = 0; j < storeLocations[j].cookiesPerHour[i]
+      }
+      let td = document.createElement('td');
+      td.textContent = totalHours;
+      tr.appendChild(td);
+
+
+    }
+  }
 
 
 };
